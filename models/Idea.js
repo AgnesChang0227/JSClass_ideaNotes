@@ -12,6 +12,11 @@ const IdeaSchema = new Schema(
             type: String,
             required: true,
         },
+        users:{
+            type:String,
+            required:false,
+            // default:"admin"
+        },
         date: {
             type: Date,
             default:Date.now,
