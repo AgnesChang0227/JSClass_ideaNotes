@@ -3,10 +3,8 @@ const router = express.Router();
 import IdeaFn from "../controllers/ideaController.js";
 
 router.get("/",IdeaFn.getIdeas);//show notes
-router.get("/add", IdeaFn.getAddIdea);//insert form
-router.post("/add",IdeaFn.postAddIdeas );//insert notes => database
-router.get("/edit/:id",IdeaFn.getEditIdea);//edit form
-router.put('/edit/:id', IdeaFn.putEditIdea);//update notes => database
+router.get("/add", IdeaFn.getAddIdea).post("/add",IdeaFn.postAddIdeas );//insert notes => post database
+router.get("/edit/:id",IdeaFn.getEditIdea).put('/edit/:id', IdeaFn.putEditIdea);//update notes => put database
 router.delete("/:id",IdeaFn.deleteIdea);//delete notes
 
 export default router;

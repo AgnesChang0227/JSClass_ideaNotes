@@ -5,7 +5,7 @@ const IdeaFn = {
             .lean()//.lean() => cached ，可以handle更多data
             .sort({date: "desc"})
             .then(ideas => {
-                console.log(ideas)
+                console.log(ideas);
                 res.render("ideas/index", {ideas})
             })
     },
@@ -32,6 +32,7 @@ const IdeaFn = {
             };
             //insert a new data to database
             new Idea(newUser).save().then((idea) => {
+               req.flash("success_msg","Note Added !");
                 res.redirect("/ideas");
             });
         }
@@ -44,6 +45,7 @@ const IdeaFn = {
             .lean()
             .then((idea) => {
                 console.log(idea._id);
+
                 res.render("ideas/edit", {idea})
             })
     },
@@ -53,6 +55,7 @@ const IdeaFn = {
                 idea.title = req.body.title;
                 idea.details = req.body.details;
                 idea.save().then(() => {
+                    req.flash("success_msg",`Note Updated : ${idea.title}`);
                     res.redirect("/ideas");
                 })
             })
@@ -60,6 +63,7 @@ const IdeaFn = {
     deleteIdea :(req, res) => {
         Idea.deleteOne({_id: req.params.id})
             .then(() => {
+                req.flash("error_msg","Note Deleted")
                 res.redirect("/ideas");
             })
     },
