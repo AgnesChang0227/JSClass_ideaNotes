@@ -44,8 +44,6 @@ const IdeaFn = {
         Idea.findOne({_id: req.params.id})
             .lean()
             .then((idea) => {
-                console.log(idea._id);
-
                 res.render("ideas/edit", {idea})
             })
     },

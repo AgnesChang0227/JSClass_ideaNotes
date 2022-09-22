@@ -4,6 +4,7 @@ import {engine} from "express-handlebars";
 import mongoose from "mongoose";
 import flash from "connect-flash";
 import session from "express-session";
+import passport from "passport";
 
 import bodyParser from "body-parser";
 import morgan from "morgan";
@@ -11,7 +12,8 @@ import methodOverride from "method-override";
 
 import ideasRoute from "./routes/ideasRoute.js";
 import usersRoute from "./routes/usersRoute.js";
-
+import passportConfig from "./config/passportConfig.js";
+passportConfig(passport);//把passport 丟進passportConfig做連結
 
 //connect to mongoDB
 mongoose.connect("mongodb://localhost:27017/note-dev")
@@ -35,11 +37,14 @@ app.use(session({
     saveUninitialized:true
 }));//return value to use
 app.use(flash());
+//任何地方都可以加msg
 app.use((req,res,next)=>{
     res.locals.success_msg = req.flash("success_msg");
     res.locals.error_msg = req.flash("error_msg");
+    res.locals.fail_passport = req.flash("fail_passport");
     next();
 })
+
 
 app.get("/", (req, res) => {
     const title = "Welcome";
