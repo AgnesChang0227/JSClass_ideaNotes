@@ -8,7 +8,7 @@ export default (passport) => {
             User.findOne({email: emailInput})
                 .then(user => {
                     if (!user) {
-                       return  done(null, false, {
+                     done(null, false, {
                             type: "fail_passport",
                             message: "No User Found",
                         });
@@ -16,9 +16,9 @@ export default (passport) => {
                         bcrypt.compare(passportInput, user.password, (err, isMatch) => {
                             if (err) throw err;
                             if (isMatch) {
-                               return  done(null, user);
+                             done(null, user);
                             } else {
-                               return  done(null, false, {//除了false，再send個object(err info)
+                                done(null, false, {//除了false，再send個object(err info)
                                     type: "fail_passport",
                                     message: "Password Incorrect",
                                 })
@@ -31,7 +31,7 @@ export default (passport) => {
         done(null,user.id);
     });
     passport.deserializeUser((id,done)=>{// delete token
-        User.findById(id,()=>{
+        User.findById(id,(err,user)=>{
             done(err,user);
         })
     })

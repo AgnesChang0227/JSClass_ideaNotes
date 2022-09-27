@@ -12,9 +12,10 @@ const IdeaSchema = new Schema(
             type: String,
             required: true,
         },
-        users:{
-            type:String,
-            required:false,//original true
+        user:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"users",
+            required:true,//original true
         },
         date: {
             type: Date,

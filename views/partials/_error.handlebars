@@ -3,7 +3,7 @@
 {{else}}
 {{/each}}
 
-{{#each fail_passport}}
-    <div class="alert alert-danger">{{message}}</div>
+{{#if fail_passport}}
+    <div class="alert alert-danger">{{fail_passport}}</div>
 {{else}}
-{{/each}}
+{{/if}}
